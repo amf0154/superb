@@ -1,8 +1,7 @@
 
-function index (req, res){
-    res.senda("it\'s ok!");     
+function index (ctx, next){
+    ctx.body = "it\'s ok!";     
 }
-
 
 module.exports = {
     index

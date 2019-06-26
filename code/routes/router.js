@@ -1,6 +1,8 @@
-var router = require('express').Router();
 var baseCtrl = require('../controllers/baseController');
 
-router.get('/test', baseCtrl.index);
+const api_path = '/api/';
+module.exports = ({ router }) => {   
+router.get('/', ctx => ctx.body = 'What are you looking for? :P' ); 
 
-module.exports = router;
+router.get(api_path + 'test', baseCtrl.index);
+};
