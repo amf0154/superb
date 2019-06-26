@@ -1,6 +1,6 @@
 
 function index (req, res){
-    res.send("it\'s ok!");     
+    res.senda("it\'s ok!");     
 }
 
 

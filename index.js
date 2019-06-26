@@ -6,7 +6,7 @@ var fs  = require('fs');
 var path = require('path');
 // setup the logger 
 var app = express(); 
-
+const knex = require('./knex/knex.js');
 app.use(morgan('combined'));
 app.use(morgan('common', {
     stream: fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
