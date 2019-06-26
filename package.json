@@ -1,0 +1,25 @@
+{
+  "name": "superB",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "Bykovsky Gleb",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amf0154/superb"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.4.0",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.19.1",
+    "request": "^2.88.0"
+  }
+}
