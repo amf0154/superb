@@ -9,6 +9,7 @@ var bodyParser = require('koa-bodyparser');
 app.use(bodyParser());
 app.use(logger());
 
+/*
 // error handling
 app.use(async (ctx, next) => {
   try {
@@ -19,6 +20,7 @@ app.use(async (ctx, next) => {
     ctx.app.emit('error', err, ctx);
   }
 });
+*/
 
 // instantiate our new Router
 const router = new Router();
