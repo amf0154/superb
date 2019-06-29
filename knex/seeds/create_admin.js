@@ -10,7 +10,7 @@ exports.seed = function(knex) {
         {
           name: "admin",
           email: "admin@gmail.com",
-          role: "admin",
+          role_id: 2,
           note: "test note",
           salt: salt,
           hash: crypto.pbkdf2Sync(password, salt, 1000, 64, 'sha512').toString('hex')
