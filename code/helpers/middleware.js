@@ -5,7 +5,7 @@ class Middleware {
         const result = Joi.validate(ctx.request.body,
             Joi.object().keys({
                 email: Joi.string().email({ minDomainSegments: 2 }).required(),
-                password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required(),
+                password: Joi.string().regex(/^[a-zA-Z0-9_]{3,30}$/).required(),
                 name: Joi.string().max(25),
                 note: Joi.string().max(250)
             }));
@@ -17,11 +17,11 @@ class Middleware {
         const result = Joi.validate(ctx.request.body,
             Joi.object().keys({
                 email: Joi.string().email({ minDomainSegments: 2 }),
-                password: Joi.string().regex(/^[a-zA-Z0-9]{5,30}$/),
+                password: Joi.string().regex(/^[a-zA-Z0-9_]{5,30}$/),
                 name: Joi.string().max(25),
                 note: Joi.string().max(250),
                 user_id: Joi.number().integer().required(),
-                currentPassword: Joi.string().regex(/^[a-zA-Z0-9]{5,30}$/).required(),
+                currentPassword: Joi.string().regex(/^[a-zA-Z0-9_]{5,30}$/).required(),
             }));
         const { value, error } = result;
         const valid = error == null;
@@ -31,7 +31,7 @@ class Middleware {
         const result = Joi.validate(ctx.request.body,
             Joi.object().keys({
                 email: Joi.string().email({ minDomainSegments: 2 }),
-                password: Joi.string().regex(/^[a-zA-Z0-9]{5,30}$/),
+                password: Joi.string().regex(/^[a-zA-Z0-9_]{5,30}$/),
                 name: Joi.string().max(25),
                 note: Joi.string().max(250),
                 role_id: Joi.number().integer().required(),
@@ -45,7 +45,7 @@ class Middleware {
         const result = Joi.validate(ctx.request.body,
             Joi.object().keys({
                 email: Joi.string().email({ minDomainSegments: 2 }).required(),
-                password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required(),
+                password: Joi.string().regex(/^[a-zA-Z0-9_]{3,30}$/).required(),
                 name: Joi.string().max(25),
                 note: Joi.string().max(250),
                 role_id: Joi.number().integer().required()
@@ -58,7 +58,7 @@ class Middleware {
         const result = Joi.validate(ctx.request.body,
             Joi.object().keys({
                 email: Joi.string().email({ minDomainSegments: 2 }).required(),
-                password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required(),
+                password: Joi.string().regex(/^[a-zA-Z0-9_]{3,30}$/).required(),
             }));
         const { value, error } = result;
         const valid = error == null;
