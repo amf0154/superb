@@ -23,7 +23,7 @@ class Users {
     static async userById(ctx) { 
         const id = ctx.request.body.id;
         try{
-            const user = await knex('users').where('id', id).column('id','name', 'email', 'role_id', 'note').select();
+            const user = await knex('users').where('id', id) //.column('id','name', 'email', 'role_id', 'note').select();
             if(user.length !== 0){
                 ctx.body = user
             }else{
@@ -150,20 +150,24 @@ class Users {
                 if(hash === searchUser[0].hash){
                     const salt = crypto.randomBytes(16).toString('hex');
                     const hash = params.password ? crypto.pbkdf2Sync(params.password, salt, 1000, 64, 'sha512').toString('hex') : '';
+                    
+                    function setNewPassword(_salt, _hash){
+                        this.salt = _salt, 
+                        this.hash = _hash;
+                    }
+
                     const preparedStatement = {
                         name: params.name,
                         email: params.email,
                         note: params.note,
-                        salt: salt,
-                        hash: hash
+                        salt: searchUser[0].salt,
+                        hash: searchUser[0].hash
                     }
-                    const preparedStmWithoutPassword = {
-                        name: params.name,
-                        email: params.email,
-                        note: params.note,
-                    }
-                   const prepParams = params.password.length !==0 && params.password ? preparedStatement : preparedStmWithoutPassword;
-                   const result = await knex('users').where('id', '=', searchUser[0].id).update(prepParams);
+
+                   if(params.password)
+                    setNewPassword.call(preparedStatement,salt,hash);
+
+                   const result = await knex('users').where('id', '=', searchUser[0].id).update(preparedStatement);
                    if(result == 1){
                     ctx.body = "User has been updated sucessfully!"
                    }else{
@@ -188,23 +192,25 @@ class Users {
             if(searchUser.length !== 0 && searchUser){
                     const salt = crypto.randomBytes(16).toString('hex');
                     const hash = params.password ? crypto.pbkdf2Sync(params.password, salt, 1000, 64, 'sha512').toString('hex') : '';
+
+                    function setNewPassword(_salt, _hash){
+                        this.salt = _salt, 
+                        this.hash = _hash;
+                    }
+
                     const preparedStatement = {
                         name: params.name,
                         email: params.email,
-                        role_id: params.role_id,
                         note: params.note,
-                        salt: salt,
-                        hash: hash
-                    }
-                    const preparedStmWithoutPassword = {
-                        name: params.name,
-                        email: params.email,
                         role_id: params.role_id,
-                        note: params.note,
+                        salt: searchUser[0].salt,
+                        hash: searchUser[0].hash
                     }
-                   const prepParams = params.password ? preparedStatement : preparedStmWithoutPassword;
-                   console.log(prepParams)
-                   const result = await knex('users').where('id', '=', searchUser[0].id).update(prepParams);
+
+                   if(params.password)
+                    setNewPassword.call(preparedStatement,salt,hash);
+                    
+                   const result = await knex('users').where('id', '=', searchUser[0].id).update(preparedStatement);
                    if(result ==1){
                     ctx.body = "User has been updated sucessfully!"
                    }else{
